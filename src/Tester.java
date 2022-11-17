@@ -21,8 +21,10 @@ Each of your classes, CalculatorClient and CalculatorServer, should have main(St
 CalculatorServer:
 Creates a ServerSocket that awaits a connection on a port of your choice.
 When a connection is made, sends a one-time welcome message to the connected socket.
-Repeatedly awaits data from the connected socket in the form <double> <operator> <double>, where <double> is a string that can be parsed to a Java Double data type, and <operator> is a string that is either "+", "-", "/", or "*", representing addition, subtraction, division, or multiplication, respectively.
-When data of this form is received, representing an arithmetic calculation to be made, actually does the calculation and send the result back to the connecting socket.
+Repeatedly awaits data from the connected socket in the form <double> <operator> <double>, where <double> is a string
+that can be parsed to a Java Double data type, and <operator> is a string that is either "+", "-", "/", or "*",
+representing addition, subtraction, division, or multiplication, respectively. When data of this form is received,
+representing an arithmetic calculation to be made, actually does the calculation and send the result back to the connecting socket.
 
 
 CalculatorClient:
