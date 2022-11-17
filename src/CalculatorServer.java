@@ -22,26 +22,26 @@ public class CalculatorServer {
                 var in = new BufferedReader(                                                 // reads from client inputstream
                         new InputStreamReader(clientSocket.getInputStream()));
         ) {
-            System.out.println("Server: established connection to client;");
+            System.out.println("Server: Established connection to client!");
             out.println("Welcome to the calculator server, client! Please enter <double> <operator> " +
             "<double>, separated by spaces...");
             String inputLine;
             while ((inputLine = in.readLine()) != null) {
-                // divide input line by number, operator, number
-                // for each loop inside string until an operator is hit
-                // store operator
-                // double operand1 = 0 until index of operand minus one
-                // double operand2 = index of operand plus one until length of inputline
 
-//                double operand1 = 0;
-//                double operand2 = 0;
                 double result = 0;
 
                 for (int i = 0; i < inputLine.length(); i++) {
 
                     char currentChar = inputLine.charAt(i);
+
                     if (currentChar == '+' || currentChar == '-' || currentChar == '*' || currentChar == '/' ||
                             currentChar == '%') {
+
+                        if ( (inputLine.charAt(i - 1) != ' ') || inputLine.charAt(i + 1) != ' ' ) {
+                            out.println("Server: Incorrect formatting. Add a space before and after the operator.");
+                            out.flush();
+                            break;
+                        }
 
                         double operand1 = Double.parseDouble(inputLine.substring(0, i - 1));
                         double operand2 = Double.parseDouble(inputLine.substring(i + 2));
@@ -54,11 +54,12 @@ public class CalculatorServer {
                             case '%' -> result = operand1 % operand2;
                         }
 
+                        out.println("Result received: " + result);
+
                     }
 
                 }
 
-                out.println(result + "\n");
             }
         } catch (IOException e) {
             System.out.println("Exception caught when trying to listen on port "
